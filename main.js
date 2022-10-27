@@ -1,36 +1,46 @@
-class Card 
+import {Card} from "./card.js";
+
+var store = 
 {
-    constructor(character, color, position) {
-        this.character = character;
-        this.color = color;
-        this.position = position;
+    turn: 'first',
+    firstCard: null,
+    secondCard: null,
+    victory: false,
+};
 
-        this.filename = "yoda.jpg";
-    }
-}
-
-firstCard = null;
-secondCard = null;
-cards = [];
+var cards = [];
 initCards();
 
+addEventListener('DOMContentLoaded', () => {
+    addClickHandlerToCardElements();
+});
+
+function addClickHandlerToCardElements() {
+    cards.forEach(card => {
+        var element = getCardElementBy(card.position);
+        element.addEventListener('click', () => cardClickHandler(card.position));
+    })
+}
+
 function cardClickHandler(number) {
-    var element = getCardElementBy(number);
     var clickedCard = cards[number - 1];
 
-    if (firstCard === null) {
-        firstCard = clickedCard;
-        element.src = "./images/" + firstCard.filename;
+    if (store.turn === 'first') {
+        store.firstCard = clickedCard;
+        var firstElement = getCardElementBy(store.firstCard.position);
+        firstElement.src = "./images/" + store.firstCard.filename;
     } else {
-        secondCard = clickedCard;
-        firstElement = getCardElementBy(firstCard.position); 
-        secondElement = getCardElementBy(secondCard.position);
-        secondElement.src = "./images/" +  secondCard.filename;
+        store.secondCard = clickedCard;
+        var firstElement = getCardElementBy(store.firstCard.position);
+        var secondElement = getCardElementBy(store.secondCard.position);
+        secondElement.src = "./images/" +  store.secondCard.filename;
 
-        isMatch = firstCard.character === secondCard.character;
+        var isMatch = store.firstCard.character === store.secondCard.character;
         if (isMatch) {
             firstElement.onclick = null;
             secondElement.onclick = null;
+
+            checkWinCondition();
         } else {
             setTimeout(() => {
                 firstElement.src = "./images/grey.png";
@@ -38,9 +48,13 @@ function cardClickHandler(number) {
             }, 1000);
         }
 
-        firstCard = null;
-        secondCard = null;
+        store.firstCard = null;
+        store.secondCard = null;
     }
+}
+
+function checkWinCondition() {
+
 }
 
 function initCards() {
