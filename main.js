@@ -5,11 +5,9 @@ var store =
     turn: 'first',
     firstCard: null,
     secondCard: null,
-    victory: false,
 };
 
-var cards = [];
-initCards();
+var cards = initCards();
 
 addEventListener('DOMContentLoaded', () => {
     addClickHandlerToCardElements();
@@ -29,6 +27,8 @@ function cardClickHandler(number) {
         store.firstCard = clickedCard;
         var firstElement = getCardElementBy(store.firstCard.position);
         firstElement.src = "./images/" + store.firstCard.filename;
+
+        store.turn = 'second';
     } else {
         store.secondCard = clickedCard;
         var firstElement = getCardElementBy(store.firstCard.position);
@@ -45,12 +45,17 @@ function cardClickHandler(number) {
             setTimeout(() => {
                 firstElement.src = "./images/grey.png";
                 secondElement.src = "./images/grey.png";
-            }, 1000);
+            }, 700);
         }
 
-        store.firstCard = null;
-        store.secondCard = null;
+        resetStore();
     }
+}
+
+function resetStore() {
+    store.firstCard = null;
+    store.secondCard = null;
+    store.turn = 'first';
 }
 
 function checkWinCondition() {
@@ -58,6 +63,7 @@ function checkWinCondition() {
 }
 
 function initCards() {
+    var cards = [];
     cards.push(new Card("Denis the Helpless", "blue", 1));
     cards.push(new Card("Stunning Anton", "blue", 2));
     cards.push(new Card("Overwhelming Galm", "blue", 3));
@@ -74,6 +80,8 @@ function initCards() {
     cards.push(new Card("Unspeakable Jolander", "red", 14));
     cards.push(new Card("Demanding Lizzie", "red", 15));
     cards.push(new Card("Astonishing Gerald", "red", 16));
+
+    return cards;
 }
 
 function getCardElementBy(number) {
