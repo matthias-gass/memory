@@ -1,5 +1,7 @@
 import {Card} from "./card.js";
 
+///init
+
 var store = 
 {
     turn: 'first',
