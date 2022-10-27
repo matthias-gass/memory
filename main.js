@@ -4,45 +4,72 @@ import {Card} from "./card.js";
 
 var store = 
 {
-    turn: 'first',
+    turn: "first",
     firstCard: null,
     secondCard: null,
 };
 
 var cards = initCards();
 
-addEventListener('DOMContentLoaded', () => {
+addEventListener("DOMContentLoaded", () => {
     addClickHandlerToCardElements();
 });
 
 function addClickHandlerToCardElements() {
     cards.forEach(card => {
         var element = getCardElementBy(card.position);
-        element.addEventListener('click', () => cardClickHandler(card.position));
+        element.addEventListener("click", cardClickHandler);
     })
+
+    var button = document.querySelector(".button");
+    button.addEventListener("click", restart)
 }
 
-function cardClickHandler(number) {
+function restart() {
+    resetStore();
+
+    var message = document.querySelector(".message");
+    message.innerHTML = "";
+
+    cards.forEach(card => {
+        card.revealed = false;
+        var element = getCardElementBy(card.position);
+        element.src = "./images/grey.png";
+        element.addEventListener("click", cardClickHandler);
+    })
+
+}
+
+function cardClickHandler(event) {
+    console.log("click");
+    var number = getNumberByElementId(event.target.id);
+
     var clickedCard = cards[number - 1];
 
-    if (store.turn === 'first') {
+    if (store.turn === "first") {
         store.firstCard = clickedCard;
-        var firstElement = getCardElementBy(store.firstCard.position);
+        var firstElement = event.target;
         firstElement.src = "./images/" + store.firstCard.filename;
 
-        store.turn = 'second';
+        store.turn = "second";
     } else {
         store.secondCard = clickedCard;
         var firstElement = getCardElementBy(store.firstCard.position);
-        var secondElement = getCardElementBy(store.secondCard.position);
+        var secondElement = event.target;
         secondElement.src = "./images/" +  store.secondCard.filename;
 
         var isMatch = store.firstCard.character === store.secondCard.character;
         if (isMatch) {
-            firstElement.onclick = null;
-            secondElement.onclick = null;
+            store.firstCard.revealed = true;
+            store.secondCard.revealed = true;
 
-            checkWinCondition();
+            firstElement.removeEventListener("click", cardClickHandler);
+            secondElement.removeEventListener("click", cardClickHandler);
+
+            if(checkWinCondition()) {
+                var message = document.querySelector(".message");
+                message.innerHTML = "Gewonnen";
+            };
         } else {
             setTimeout(() => {
                 firstElement.src = "./images/grey.png";
@@ -57,11 +84,11 @@ function cardClickHandler(number) {
 function resetStore() {
     store.firstCard = null;
     store.secondCard = null;
-    store.turn = 'first';
+    store.turn = "first";
 }
 
 function checkWinCondition() {
-
+    return cards.every(card => card.revealed === true);
 }
 
 function initCards() {
@@ -88,4 +115,8 @@ function initCards() {
 
 function getCardElementBy(number) {
     return document.querySelector("#card-" + number);
+}
+
+function getNumberByElementId(id) {
+    return id.replace("card-", "");
 }
