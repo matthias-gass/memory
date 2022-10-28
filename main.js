@@ -4,21 +4,19 @@ import { getCardElementBy, getNumberByElementId, checkWinCondition } from "./hel
 ///init
 var store = initStore();
 var cards = initCards();
+var elements = [];
 var modal = document.querySelector(".modal");
 
 addEventListener("DOMContentLoaded", () => {
-    addClickHandlerToCardElements();
+    cards.forEach(card => {
+        var element = getCardElementBy(card.position);
+        element.addEventListener("click", cardClickHandler);
+        elements.push(element);
+    })
 
     var button = document.querySelector(".button");
     button.addEventListener("click", restart)
 });
-
-function addClickHandlerToCardElements() {
-    cards.forEach(card => {
-        var element = getCardElementBy(card.position);
-        element.addEventListener("click", cardClickHandler);
-    })
-}
 
 function restart() {
     hideModal();
@@ -27,6 +25,7 @@ function restart() {
 
     cards.forEach(card => {
         card.revealed = false;
+        //var element = elements[card.position - 1]; //Je nachdem, auf was du den Fokus legen willst: Das Arbeiten mit Arrays oder mit DOMElementen
         var element = getCardElementBy(card.position);
         element.src = "./images/grey.png";
         element.addEventListener("click", cardClickHandler);
@@ -46,6 +45,7 @@ function cardClickHandler(event) {
         store.turn = "second";
     } else {
         store.secondCard = clickedCard;
+
         var firstElement = getCardElementBy(store.firstCard.position);
         var secondElement = event.target;
         secondElement.src = "./images/" +  store.secondCard.filename;
