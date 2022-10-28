@@ -6,6 +6,7 @@ var store = initStore();
 var cards = initCards();
 var elements = [];
 var modal = document.querySelector(".modal");
+var cardBackImgSrc = "./images/grey-pattern.jpg";
 
 addEventListener("DOMContentLoaded", () => {
     cards.forEach(card => {
@@ -27,7 +28,7 @@ function restart() {
         card.revealed = false;
         //var element = elements[card.position - 1]; //Je nachdem, auf was du den Fokus legen willst: Das Arbeiten mit Arrays oder mit DOMElementen
         var element = getCardElementBy(card.position);
-        element.src = "./images/grey.png";
+        element.src = cardBackImgSrc;
         element.addEventListener("click", cardClickHandler);
     })
 }
@@ -64,8 +65,8 @@ function cardClickHandler(event) {
             };
         } else {
             setTimeout(() => {
-                firstElement.src = "./images/grey.png";
-                secondElement.src = "./images/grey.png";
+                firstElement.src = cardBackImgSrc;
+                secondElement.src = cardBackImgSrc;
             }, 700);
         }
 
