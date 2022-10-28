@@ -1,3 +1,8 @@
+@font-face {
+    font-family: ComixLoud;
+    src: url("./fonts/ComixLoud.ttf");
+}
+
 :root {
     --primary: hsl(180, 100%, 50%);
 }
@@ -22,9 +27,10 @@ body {
 }
 
 .message {
-    font-size: 30px;
+    font-size: 16px;
     color: var(--primary);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: ComixLoud;
+    
 }
 
 .memory-container {
@@ -60,8 +66,9 @@ body {
     opacity: 1;
     border: none;
     border-radius: 3px;
-    color: black;
-    font-size: 14px;
+    color: #111;
+    font-family: ComixLoud;
+    font-size: 10px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -72,7 +79,7 @@ body {
 
 .modal {
     display: none;
-    color: white;
+    color: #111;
     background-color: var(--primary);
     border: white 2px solid;
     border-radius: 4px;
@@ -80,7 +87,8 @@ body {
     position: absolute;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-family: ComixLoud;
+    font-size: 30px;
 }
 
 .modal-visible {
