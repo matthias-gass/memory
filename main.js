@@ -4,6 +4,7 @@ import { getCardElementBy, getNumberByElementId, checkWinCondition } from "./hel
 ///init
 var store = initStore();
 var cards = initCards();
+var modal = document.querySelector(".modal");
 
 addEventListener("DOMContentLoaded", () => {
     addClickHandlerToCardElements();
@@ -20,6 +21,8 @@ function addClickHandlerToCardElements() {
 }
 
 function restart() {
+    hideModal();
+
     store.reset();
 
     cards.forEach(card => {
@@ -56,8 +59,7 @@ function cardClickHandler(event) {
             secondElement.removeEventListener("click", cardClickHandler);
 
             if(checkWinCondition(cards)) {
-                var message = document.querySelector(".message");
-                message.innerHTML = "Gewonnen";
+                showModal();
             };
         } else {
             setTimeout(() => {
@@ -68,4 +70,12 @@ function cardClickHandler(event) {
 
         store.reset();
     }
+}
+
+function showModal() {
+    if(modal.classList.contains("modal-visible") === false) modal.classList.add("modal-visible");
+}
+
+function hideModal() {
+    modal.classList.remove("modal-visible");
 }

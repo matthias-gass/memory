@@ -57,3 +57,19 @@ body {
     opacity: 0.8;
 }
 
+.modal {
+    display: none;
+    color: white;
+    background-color: var(--primary);
+    border: white 2px solid;
+    border-radius: 4px;
+    padding: 20px 40px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+.modal-visible {
+    display: flex;
+}
