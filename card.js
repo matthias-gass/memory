@@ -8,4 +8,8 @@ export class Card
 
         this.filename = "yoda.jpg";
     }
+
+    isEqual(card) {
+        return this.character === card.character;
+    }
 }

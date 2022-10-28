@@ -52,8 +52,7 @@ function cardClickHandler(event) {
         var secondElement = event.target;
         secondElement.src = "./images/" +  store.secondCard.filename;
 
-        var isMatch = store.firstCard.character === store.secondCard.character;
-        if (isMatch) {
+        if (store.firstCard.isEqual(store.secondCard)) {
             store.firstCard.revealed = true;
             store.secondCard.revealed = true;
 
