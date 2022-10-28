@@ -44,7 +44,8 @@ function cardClickHandler(event) {
 
         store.turn = "second";
     } else {
-        store.secondCard = clickedCard;
+        if(store.firstCard.position === clickedCard.position) return;
+        store.secondCard = clickedCard;      
 
         var firstElement = getCardElementBy(store.firstCard.position);
         var secondElement = event.target;
