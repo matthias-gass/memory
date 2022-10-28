@@ -22,9 +22,6 @@ function addClickHandlerToCardElements() {
 function restart() {
     store.reset();
 
-    var message = document.querySelector(".message");
-    message.innerHTML = "";
-
     cards.forEach(card => {
         card.revealed = false;
         var element = getCardElementBy(card.position);
