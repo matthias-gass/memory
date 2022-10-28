@@ -1,5 +1,5 @@
 :root {
-    --primary: hsl(120, 100%, 10%);
+    --primary: hsl(180, 100%, 50%);
 }
 
 * {
@@ -14,15 +14,27 @@ html {
 body {
     height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url("./images/school.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .message {
     font-size: 30px;
     color: var(--primary);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.memory-container {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0px;
+    background: #444;
 }
 
 .memory {
@@ -32,7 +44,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 3px;
-    padding: 20px;
+    padding: 40px 10px;
 }
 
 .memory img {
@@ -48,8 +60,9 @@ body {
     opacity: 1;
     border: none;
     border-radius: 3px;
-    color: white;
+    color: black;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
 }
 
