@@ -1,5 +1,6 @@
 import { initStore, initCards } from "./init.js";
 import { getCardElementBy, getNumberByElementId, checkWinCondition } from "./helper.js";
+import { getShuffledCards } from "./cards.service.js";
 
 ///init
 var store = initStore();
@@ -24,6 +25,7 @@ function restart() {
 
     store.reset();
 
+    cards = getShuffledCards();
     cards.forEach(card => {
         card.revealed = false;
         //var element = elements[card.position - 1]; //Je nachdem, auf was du den Fokus legen willst: Das Arbeiten mit Arrays oder mit DOMElementen

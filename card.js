@@ -1,11 +1,11 @@
 export class Card 
 {
-    constructor(character, color, position) {
+    constructor(character, color) {
         this.character = character;
         this.color = color;
-        this.position = position;
-        this.revealed = false;
 
+        this.revealed = false;
+        this.position = null;
         this.filename = "yoda.jpg";
     }
 
