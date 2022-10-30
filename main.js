@@ -26,8 +26,10 @@ function restart() {
     store.reset();
 
     cards = getShuffledCards();
+
     cards.forEach(card => {
         card.revealed = false;
+        
         //var element = elements[card.position - 1]; //Je nachdem, auf was du den Fokus legen willst: Das Arbeiten mit Arrays oder mit DOMElementen
         var element = getCardElementBy(card.position);
         element.src = cardBackImgSrc;
@@ -35,6 +37,7 @@ function restart() {
     })
 }
 
+//zentrale Methode
 function cardClickHandler(event) {
     var number = getNumberByElementId(event.target.id);
 
@@ -44,6 +47,8 @@ function cardClickHandler(event) {
         store.firstCard = clickedCard;
         var firstElement = event.target;
         firstElement.src = "./images/" + store.firstCard.filename;
+        //Border-Styling
+        //firstElement.style.border = "2px solid black";
 
         store.turn = "second";
     } else {
@@ -53,8 +58,9 @@ function cardClickHandler(event) {
         var firstElement = getCardElementBy(store.firstCard.position);
         var secondElement = event.target;
         secondElement.src = "./images/" +  store.secondCard.filename;
+        
 
-        if (store.firstCard.isEqual(store.secondCard)) {
+        if (store.firstCard.isEqual(store.secondCard)) { //Alternativ: Expression direkt in if-Abfrage
             store.firstCard.revealed = true;
             store.secondCard.revealed = true;
 

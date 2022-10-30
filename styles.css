@@ -34,7 +34,7 @@ body {
 }
 
 .memory-container {
-    max-width: 700px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +44,7 @@ body {
 }
 
 .memory {
-    width: 500px;
+    width: 700px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
